@@ -1,0 +1,10 @@
+---
+environment: prd
+classes:
+- jenkins_server
+parameters:
+  project: project
+  type: build
+  size: large
+
+
