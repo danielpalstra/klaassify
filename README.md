@@ -1,32 +1,51 @@
-[![Build Status](https://travis-ci.org/danielpalstra/jsyk.svg?branch=master)](https://travis-ci.org/danielpalstra/jsyk)
+# Klaassify - An External Node Classifier for puppet
 
-# JSYK - Just So You Know
-JSYK is a tiny, simple application that sends "informative change" events to elasticsearch by using the commandline. Inspired by the prezi changelog application https://github.com/prezi/changelog
+Klaassify adds and removes nodes from and to an external (Gitlab)
+node classifier.
 
-# Elasticsearch (& Kibana)1
-JSYK uses elasticsearch as the backend. The backend for jsyk can be configured by using the `--url` parameter, but it's recommended to set the `ES_URL` environment variable. When both are not provided http://localhost:9200 will be used by default. jsyk uses the `@timestamp` field so that Kibana is supported
+## Building
 
-# Usage
-Currently jsyk only supports adding new events. Hit the following command for the available arguments
-```
-jsyk add --help
-```
+Build it!
 
-# Building
-Clone this repository
-```
-go get
-go install
+```shell
+  go build -o output/klaassify
 ```
 
-Add your `$GOPATH/bin` to the `$PATH` env variable and start using jsyk from anywhere.
+## Running
 
+Run it!
 
-# Testing
-Perform a minimal test by setting up a elasticsearch instance (we recommend this docker image) and performing the following commandline
+### Prereqs
+
+Klaassify uses the following environment variables to connect the ENC backend
+(Gitlab). Gitlab API key can be retieved from the profile of a Gitlab account
+that administrator privileges.
+
+```shell
+  export GITLAB_API_KEY=
+  export GITLAB_API_URL="http://git.k94.kvk.nl/api/v3/"
+  export ENC_GIT_REPOSITORY="enc"
+  export ENC_GIT_NAMESPACE="zmm-infra"
 ```
-go build && ./jsyk add -m "Started deployment awesomeness"
+
+### Help
+
+```shell
+  klaassify --help
 ```
 
-# TODO
-Too much todo, should start with code cleanup
+### Adding nodes
+
+Add nodes by calling `klaassify add`
+
+```shell
+  klaassify add --host zs94a-1235456456.k94.kvk.nl -e prd -c jenkins_server -t build -p project -size large
+```
+
+### Removing nodes
+
+Remove nodes from the ENC by calling `klaassify remove`
+
+```shell
+  klaassify remove --host zs94a-1235456456.k94.kvk.nl
+```

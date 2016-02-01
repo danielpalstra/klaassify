@@ -2,11 +2,14 @@
 	This file contains the available CLI flags for handling ENC entries.
 */
 
-package main
+package cli
 
-import "github.com/codegangsta/cli"
+import (
+	"github.com/codegangsta/cli"
+	"github.com/danielpalstra/klaassify/enc"
+)
 
-var entry Entry
+var entry enc.Entry
 
 // Flags contains a list of available arguments to use
 var Flags = []cli.Flag{
@@ -16,6 +19,10 @@ var Flags = []cli.Flag{
 	flagProject,
 	flagType,
 	flagSize,
+	flagGitlabToken,
+	flagRepositoryURL,
+	flagRepositoryName,
+	flagRepositoryNamespace,
 }
 
 var flagHostname = cli.StringFlag{
@@ -52,4 +59,28 @@ var flagSize = cli.StringFlag{
 	Name:        "size, s",
 	Usage:       "Size of node to add to ENC entry",
 	Destination: &entry.Parameters.Size,
+}
+
+var flagGitlabToken = cli.StringFlag{
+	Name:   "token",
+	Usage:  "Gitlab API key",
+	EnvVar: "GITLAB_API_KEY",
+}
+
+var flagRepositoryURL = cli.StringFlag{
+	Name:   "url",
+	Usage:  "Git remote used by ENC",
+	EnvVar: "GITLAB_API_URL",
+}
+
+var flagRepositoryName = cli.StringFlag{
+	Name:   "repository",
+	Usage:  "Git repository used by ENC",
+	EnvVar: "ENC_GIT_REPOSITORY",
+}
+
+var flagRepositoryNamespace = cli.StringFlag{
+	Name:   "namespace",
+	Usage:  "Gitlab namespace for ENC git repository",
+	EnvVar: "ENC_GIT_NAMESPACE",
 }
