@@ -20,6 +20,7 @@ type Parameters struct {
 	Project string `yaml:"project,omitempty"`
 	Type    string `yaml:"type,omitempty"`
 	Size    string `yaml:"size,omitempty"`
+	Role    string `yaml:"role,omitempty"`
 }
 
 // AddENCEntry adds a new ENC host entry to the repository

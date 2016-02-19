@@ -61,6 +61,12 @@ var flagSize = cli.StringFlag{
 	Destination: &entry.Parameters.Size,
 }
 
+var flagRole = cli.StringFlag{
+	Name:        "role, r",
+	Usage:       "Size of node to add to ENC entry",
+	Destination: &entry.Parameters.Role,
+}
+
 var flagGitlabToken = cli.StringFlag{
 	Name:   "token",
 	Usage:  "Gitlab API key",
