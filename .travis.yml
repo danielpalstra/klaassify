@@ -1,0 +1,30 @@
+language: go
+go:
+- '1.5'
+git:
+  submodules: false
+
+before_install:
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+
+install:
+  - go get github.com/constabulary/gb/...
+  - go get github.com/jteeuwen/go-bindata/...
+
+script:
+  - gb vendor restore
+  - make bindata
+  - make release
+
+deploy:
+  provider: releases
+  api_key: $GH_TOKEN
+  file:
+    - "bin/presenter-darwin-amd64"
+    - "bin/presenter-linux-amd64"
+    - "bin/presenter-windows-amd64.exe"
+  skip_cleanup: true
+  on:
+    tags: true
+    go: 1.5

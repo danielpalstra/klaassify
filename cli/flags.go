@@ -19,6 +19,7 @@ var Flags = []cli.Flag{
 	flagProject,
 	flagType,
 	flagSize,
+	flagRole,
 	flagGitlabToken,
 	flagRepositoryURL,
 	flagRepositoryName,
@@ -63,7 +64,7 @@ var flagSize = cli.StringFlag{
 
 var flagRole = cli.StringFlag{
 	Name:        "role, r",
-	Usage:       "Size of node to add to ENC entry",
+	Usage:       "Role of the node (master, slave..)",
 	Destination: &entry.Parameters.Role,
 }
 
