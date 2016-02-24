@@ -24,7 +24,7 @@ type Parameters struct {
 }
 
 // AddENCEntry adds a new ENC host entry to the repository
-func AddENCEntry(hostName string, class string, entry Entry, backend gitlab.ENCBackend) {
+func AddENCEntry(hostName string, class string, entry Entry, backend gitlab.ENCBackend, force bool) {
 	// TODO class should be directly injected in the entry array
 	b := []string{class}
 	entry.Classes = b
@@ -40,12 +40,12 @@ func AddENCEntry(hostName string, class string, entry Entry, backend gitlab.ENCB
 	}
 
 	// TODO implement error handling for
-	gitlab.AddToGitlab(fileName, enc, backend)
+	gitlab.AddToGitlab(fileName, enc, backend, force)
 }
 
 // RemoveENCEntry removes an existing host from the ENC.
-func RemoveENCEntry(hostName string, backend gitlab.ENCBackend) {
-	gitlab.RemoveFromGitlab(hostName+".yaml", backend)
+func RemoveENCEntry(hostName string, backend gitlab.ENCBackend, force bool) {
+	gitlab.RemoveFromGitlab(hostName+".yaml", backend, force)
 }
 
 func writeToFile(source []byte, fileName string) (fn string, err error) {

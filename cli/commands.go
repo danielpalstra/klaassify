@@ -66,7 +66,7 @@ func addEntry(c *cli.Context) {
 
 	b := gitlab.ENCBackend{c.String("token"), c.String("url"), c.String("namespace"), c.String("repository")}
 
-	enc.AddENCEntry(c.String("hostname"), c.String("class"), entry, b)
+	enc.AddENCEntry(c.String("hostname"), c.String("class"), entry, b, c.Bool("force"))
 }
 
 func removeEntry(c *cli.Context) {
@@ -77,7 +77,7 @@ func removeEntry(c *cli.Context) {
 
 	b := gitlab.ENCBackend{c.String("token"), c.String("url"), c.String("namespace"), c.String("repository")}
 
-	enc.RemoveENCEntry(c.String("hostname"), b)
+	enc.RemoveENCEntry(c.String("hostname"), b, c.Bool("force"))
 }
 
 func checkArguments(c *cli.Context) (err error) {
