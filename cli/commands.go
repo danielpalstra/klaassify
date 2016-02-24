@@ -22,7 +22,7 @@ var Commands = []cli.Command{
 // CommandAddEntry adds a new host to the ENC.
 var CommandAddEntry = cli.Command{
 	Name:        "add",
-	Usage:       "enc add [options]",
+	Usage:       "klaassify add [options]",
 	Description: `Command to add new host to the ENC`,
 	Action:      addEntry,
 	Flags:       Flags,
@@ -31,7 +31,7 @@ var CommandAddEntry = cli.Command{
 // CommandRemoveEntry removes a host from the ENC
 var CommandRemoveEntry = cli.Command{
 	Name:        "remove",
-	Usage:       "enc remove [options]",
+	Usage:       "klaassify remove [options]",
 	Description: `Command to remove a host from the ENC`,
 	Action:      removeEntry,
 	Flags:       Flags,

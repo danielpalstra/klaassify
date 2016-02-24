@@ -8,7 +8,7 @@ node classifier.
 Build it!
 
 ```shell
-  go build -o output/klaassify
+  go build -o build/klaassify
 ```
 
 ## Running
@@ -23,7 +23,7 @@ that administrator privileges.
 
 ```shell
   export GITLAB_API_KEY=
-  export GITLAB_API_URL="http://git.k94.kvk.nl/api/v3/"
+  export GITLAB_API_URL="http://gitlab.com/api/v3/"
   export ENC_GIT_REPOSITORY="enc"
   export ENC_GIT_NAMESPACE="zmm-infra"
 ```
@@ -39,7 +39,7 @@ that administrator privileges.
 Add nodes by calling `klaassify add`
 
 ```shell
-  klaassify add --host zs94a-1235456456.k94.kvk.nl -e prd -c jenkins_server -t build -p project -size large
+  klaassify add --host localhost.localdomain -e prd -c jenkins_server -t build -p project -size large
 ```
 
 ### Removing nodes
@@ -47,5 +47,5 @@ Add nodes by calling `klaassify add`
 Remove nodes from the ENC by calling `klaassify remove`
 
 ```shell
-  klaassify remove --host zs94a-1235456456.k94.kvk.nl
+  klaassify remove --host localhost.domain
 ```
