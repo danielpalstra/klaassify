@@ -16,7 +16,7 @@ type ENCBackend struct {
 }
 
 // AddToGitlab adds a new entry to Gitlab
-func AddToGitlab(fileName string, content []byte, backend ENCBackend) {
+func AddToGitlab(fileName string, content []byte, backend ENCBackend, force bool) {
 
 	git := glc.NewClient(nil, backend.Token)
 	git.SetBaseURL(backend.URL)
@@ -31,13 +31,15 @@ func AddToGitlab(fileName string, content []byte, backend ENCBackend) {
 	}
 	file, _, err := git.RepositoryFiles.CreateFile(backend.Namespace+"/"+backend.Repository, cf)
 	if err != nil {
-		log.Fatal(err)
+		if force != true {
+			log.Fatal(err)
+		}
 	}
 	fmt.Println(file)
 }
 
 // RemoveFromGitlab removes a new entry to Gitlab
-func RemoveFromGitlab(fileName string, backend ENCBackend) {
+func RemoveFromGitlab(fileName string, backend ENCBackend, force bool) {
 
 	git := glc.NewClient(nil, backend.Token)
 	git.SetBaseURL(backend.URL)
@@ -50,6 +52,8 @@ func RemoveFromGitlab(fileName string, backend ENCBackend) {
 
 	_, _, err := git.RepositoryFiles.DeleteFile(backend.Namespace+"/"+backend.Repository, fo)
 	if err != nil {
-		log.Fatal(err)
+		if force != true {
+			log.Fatal(err)
+		}
 	}
 }

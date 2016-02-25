@@ -22,7 +22,7 @@ var Commands = []cli.Command{
 // CommandAddEntry adds a new host to the ENC.
 var CommandAddEntry = cli.Command{
 	Name:        "add",
-	Usage:       "enc add [options]",
+	Usage:       "klaassify add [options]",
 	Description: `Command to add new host to the ENC`,
 	Action:      addEntry,
 	Flags:       Flags,
@@ -31,7 +31,7 @@ var CommandAddEntry = cli.Command{
 // CommandRemoveEntry removes a host from the ENC
 var CommandRemoveEntry = cli.Command{
 	Name:        "remove",
-	Usage:       "enc remove [options]",
+	Usage:       "klaassify remove [options]",
 	Description: `Command to remove a host from the ENC`,
 	Action:      removeEntry,
 	Flags:       Flags,
@@ -66,7 +66,7 @@ func addEntry(c *cli.Context) {
 
 	b := gitlab.ENCBackend{c.String("token"), c.String("url"), c.String("namespace"), c.String("repository")}
 
-	enc.AddENCEntry(c.String("hostname"), c.String("class"), entry, b)
+	enc.AddENCEntry(c.String("hostname"), c.String("class"), entry, b, c.Bool("force"))
 }
 
 func removeEntry(c *cli.Context) {
@@ -77,7 +77,7 @@ func removeEntry(c *cli.Context) {
 
 	b := gitlab.ENCBackend{c.String("token"), c.String("url"), c.String("namespace"), c.String("repository")}
 
-	enc.RemoveENCEntry(c.String("hostname"), b)
+	enc.RemoveENCEntry(c.String("hostname"), b, c.Bool("force"))
 }
 
 func checkArguments(c *cli.Context) (err error) {

@@ -20,6 +20,7 @@ var Flags = []cli.Flag{
 	flagType,
 	flagSize,
 	flagRole,
+	flagForce,
 	flagGitlabToken,
 	flagRepositoryURL,
 	flagRepositoryName,
@@ -66,6 +67,11 @@ var flagRole = cli.StringFlag{
 	Name:        "role, r",
 	Usage:       "Role of the node (master, slave..)",
 	Destination: &entry.Parameters.Role,
+}
+
+var flagForce = cli.BoolFlag{
+	Name:  "force",
+	Usage: "Return the command as succesfull, even when errors occur.",
 }
 
 var flagGitlabToken = cli.StringFlag{
